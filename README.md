@@ -13,7 +13,7 @@ assigned job.
 
 ## Related Work
 - There is a website already exist with the same purpose of our project. This project will be different than the existing website.
-  - The deign will be different than the existing one.
+  - The design will be different than the existing one.
   - The modern design will be applied.
 - Our main focus would be **threads** and **job board** for the Korean owners. Also, we are going to focus on people in 20s, and 30s.
   - Thread: The user can make **threads** for Korean people in Winnipeg and hopefully 
