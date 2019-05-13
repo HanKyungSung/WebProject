@@ -21,7 +21,7 @@ proejct
 ├── project1
 │   └── WebProject
 │       ├── backend
-|		├── frontend
+|	├── frontend
 |       └── README.md
 └── Homestead
 ```
