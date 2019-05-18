@@ -93,4 +93,11 @@ proejct
 
    > Once virtual machine is up, nginx is running and Laravel is already serve. To test this, go to browser and type 192.168.10.10
 
+## Connect to Database
+> Homestead already setup the database in mysql and postgres already.
+> Name of the database is `homestead` and password is `secret`
+
+1. To connect database use command `mysql -u homestead -p` and enter the password.   
+2. Once get into mysql, go to homestead database use `use homestead`. 
+3. You are good to go!.
    
