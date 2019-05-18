@@ -97,7 +97,8 @@ proejct
 > Homestead already setup the database in mysql and postgres already.
 > Name of the database is `homestead` and password is `secret`
 
-1. To connect database use command `mysql -u homestead -p` and enter the password.   
-2. Once get into mysql, go to homestead database use `use homestead`. 
-3. You are good to go!.
+1. Go to backend folder and `vagrant up` then `vagrant ssh`.
+2. To connect database use command `mysql -u homestead -p` and enter the password.   
+3. Once get into mysql, go to homestead database use `use homestead`. 
+4. You are good to go!.
    
