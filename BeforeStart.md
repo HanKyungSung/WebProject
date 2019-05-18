@@ -89,7 +89,9 @@ proejct
    
    4.9 Once virtual machine is up, `vagrant ssh` to access virtual machine. After get into virtual machine, command `ls` and you will see `backend` directory. Use `cd` to go to `backend` directory.
    
-   5.0 in `backend` directory, use `cp .env.example .env` then use `php artisan key:generate`.
+   5.0 in `backend` directory, use `cp .env.example .env` then use `php artisan key:generate`.   
+   
+   5.1 Once step 5.0 finished, use command `composer install` to create vendor folder. 
 
    > Once virtual machine is up, nginx is running and Laravel is already serve. To test this, go to browser and type 192.168.10.10
 
