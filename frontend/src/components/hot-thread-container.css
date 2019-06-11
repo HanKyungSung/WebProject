@@ -1,0 +1,7 @@
+.hot-container {
+    position: inline-block;
+    background-color: yellow;
+    width: 280px; 
+    height: 500px;;
+    vertical-align: top;
+}

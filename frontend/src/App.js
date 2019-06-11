@@ -1,39 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import NavBar from "./components/nav-bar";
+import StatContainer from "./components/stat-container";
+import ThreadContainer from "./components/thread-container";
+import HotThreadContainer from "./components/hot-thread-container";
 
-async function test()
-{
-  fetch(process.env.REACT_APP_API_BASE_URL).then(
-    function(response){
-      response.text().then(function(data){
-        console.log(data);
-      })
-    }
-  );
+async function test() {
+	fetch(process.env.REACT_APP_API_BASE_URL).then(function(response) {
+    response.text().then(function(data) {
+		console.log(data);
+    });
+  });
 }
 
 function App() {
   test();
-  console.log('asdf');
+  console.log("asdf");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          result
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+      <NavBar/>
+	  	<div className="global-container">
+			<div className="side-container">
+				<StatContainer />
+			</div>
+			<div className="body-container">
+				<ThreadContainer />
+			</div>
+			<div className="side-container">
+				<HotThreadContainer />
+			</div>
+		</div>
+	</div>
   );
 }
 

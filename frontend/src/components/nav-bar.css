@@ -1,0 +1,17 @@
+.search-position {
+    vertical-align: middle;
+}
+
+.custom-nav-bar {
+    padding: auto;
+    width: 1190px;
+}
+
+.custom-nav-item {
+    padding: auto;
+    margin: auto 0;
+}
+
+.form-control {
+    width: 300px;
+}
