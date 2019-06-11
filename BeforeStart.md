@@ -21,7 +21,7 @@ proejct
 ├── project1
 │   └── WebProject
 │       ├── backend
-|		├── frontend
+|	├── frontend
 |       └── README.md
 └── Homestead
 ```
@@ -89,8 +89,18 @@ proejct
    
    4.9 Once virtual machine is up, `vagrant ssh` to access virtual machine. After get into virtual machine, command `ls` and you will see `backend` directory. Use `cd` to go to `backend` directory.
    
-   5.0 in `backend` directory, use `cp .env.example .env` then use `php artisan key:generate`.
+   5.0 in `backend` directory, use `cp .env.example .env` then use `composer install` to create vender folder.   
+   
+   5.1 Once step 5.0 finished, use command `php artisan key:generate` to generate app key. 
 
    > Once virtual machine is up, nginx is running and Laravel is already serve. To test this, go to browser and type 192.168.10.10
 
+## Connect to Database
+> Homestead already setup the database in mysql and postgres already.
+> Name of the database is `homestead` and password is `secret`
+
+1. Go to backend folder and `vagrant up` then `vagrant ssh`.
+2. To connect database use command `mysql -u homestead -p` and enter the password.   
+3. Once get into mysql, go to homestead database use `use homestead`. 
+4. You are good to go!.
    
