@@ -2,15 +2,15 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Model;
+use App\Post;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Post::class, function (Faker $faker) {
     return [
         'user_id' => function() {
-            return factory(App\User::class)->create()->id;
+            return factory('App\User')->create()->id;
         },
-        'title' => $faker->title(),
-        'content' => $faker->sentence(),
+        'title' => $faker->sentence(),
+        'content' => $faker->paragraph(),
     ];
 });
