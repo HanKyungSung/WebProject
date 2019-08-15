@@ -19,15 +19,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app_custom.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="header">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <!-- <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a> -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -72,19 +73,44 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            <div class="row">
-                <div class="col">
-                    @yield('leftSide')
+        <div class="under_nav">
+            <div class="under_nav d-flex justify-content-center">
+                <div class="logo_wrapper">
+                    <img src="{{ asset('logos/logo.png') }}" alt="WinnipegKR Logo">
                 </div>
-                <div class="col">
-                    @yield('content')
-                </div>
-                <div class="col">
-                    @yield('rightSide')
+                <div class="form_wrapper align-self-center">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
+        </div>
+        <nav class="navbar navbar-expand-lg shadow-sm">
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Jobs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Threads
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            News
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="app">
+        <main class="py-4">
+            @yield('content')
         </main>
     </div>
 </body>
