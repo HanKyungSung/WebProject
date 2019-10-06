@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         $posts = \App\Post::paginate(15);
-        return view('welcome', ['posts' => $posts]);
+        return view('posts', ['posts' => $posts]);
     }
 }
