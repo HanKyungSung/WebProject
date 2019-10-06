@@ -37,7 +37,11 @@ class CommentController extends Controller
     {
         $post = \App\Post::find($request->post_id);
         $comments = $post->comments;
+
         $comment = Comment::create($request->all());
+        $comment->user_id = \Auth::user()->id;
+        $comment->save();
+        
         return view('post')->with([
             'post' => $post,
             'comments' => $comments
