@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('createPost');
     }
 
     /**
@@ -36,7 +36,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Code will be here to store post.
+
+        // Please redirect the user to posts page.
+        return "here";
     }
 
     /**

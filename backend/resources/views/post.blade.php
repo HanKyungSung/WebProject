@@ -20,6 +20,7 @@
             </div>
         </div>
         @endforeach
+        @auth
         <div class="col-12">
             <form method="POST" action="/create-comment">
             @csrf
@@ -32,6 +33,10 @@
                 </div>
             </form>
         </div>
+        @endauth
+        @guest
+        Please login to make a comment
+        @endguest
     </div>
 </div>
 @endsection

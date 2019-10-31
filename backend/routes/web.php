@@ -20,7 +20,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/create-post', 'PostController@create');
+Route::post('/create-post', 'PostController@store');
+
+Route::get('/create-post-form', 'PostController@create');
 
 Route::get('/post/{post}/show', 'PostController@show');
 
