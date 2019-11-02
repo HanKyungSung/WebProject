@@ -28,14 +28,16 @@
                     <label for="exampleFormControlTextarea1">Comment</label>
                     <input type="hidden" name="post_id" class="form-control" value="{{ $post->id }}">
                     <input type="hidden" name="user_id" class="form-control" value="{{ $post->user->id }}">
-                    <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea name="comment" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"></textarea>
                     <input class="btn btn-primary" type="submit" value="Submit">
                 </div>
             </form>
         </div>
         @endauth
         @guest
-        Please login to make a comment
+        <div class="col-12">
+            <h5>Please login to make a comment</h5>
+        </div>
         @endguest
     </div>
 </div>
