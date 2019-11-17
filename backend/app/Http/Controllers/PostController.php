@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
