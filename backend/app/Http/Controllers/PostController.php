@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -37,9 +40,22 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // Code will be here to store post.
+        if (!Auth::check()) 
+            return redirect()->intended('home');
 
-        // Please redirect the user to posts page.
-        return "here";
+        // Get the currently authenticated user...
+        $user = Auth::user();
+
+        // Get the currently authenticated user's ID...
+        $id = Auth::id();
+
+        Post::create([
+            'content' => $request->content,
+            'title' => $request->title,
+            'user_id' => $id,
+        ]);
+        
+        return redirect()->intended('home');
     }
 
     /**
