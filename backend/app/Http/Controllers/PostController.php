@@ -41,6 +41,12 @@ class PostController extends Controller
         if (!Auth::check()) 
             return redirect()->intended('home');
 
+        // Validate post data
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+        
         // Get the currently authenticated user...
         $user = Auth::user();
 
