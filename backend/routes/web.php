@@ -27,3 +27,9 @@ Route::get('/create-post-form', 'PostController@create');
 Route::get('/post/{post}/show', 'PostController@show');
 
 Route::post('/create-comment', 'CommentController@store');
+
+Route::get('/user/{user}/settings', 'UserController@edit');
+
+Route::post('/user/{user}/settings/update');
+
+Route::get('/user/{user}/posts', 'UserController@index');
