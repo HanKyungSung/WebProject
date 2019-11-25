@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    <nav id="last-nav-bar" class="navbar navbar-expand-lg p-0 border border-black">
+    <!-- <nav id="last-nav-bar" class="navbar navbar-expand-lg p-0 border border-black">
         <div class="collapse navbar-collapse justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -122,7 +122,7 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <!-- Body -->
     <div id="app">
         <div class="main py-2">
