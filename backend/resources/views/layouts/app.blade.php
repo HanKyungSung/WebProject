@@ -68,7 +68,7 @@
                                 Settings
                             </a>
 
-                            <a class="dropdown-item" href="/user/{{ Auth::user()->id }}/posts" onclick="event.preventDefault();">
+                            <a class="dropdown-item" href="/mypage">
                                 My Posts
                             </a>
 

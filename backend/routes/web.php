@@ -33,3 +33,5 @@ Route::get('/user/{user}/settings', 'UserController@edit');
 Route::post('/user/{user}/settings/update');
 
 Route::get('/user/{user}/posts', 'UserController@index');
+
+Route::get('/mypage', 'MypageController@index');
