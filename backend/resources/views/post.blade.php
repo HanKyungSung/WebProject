@@ -6,7 +6,7 @@
                 <div class="card-header">{{ $post->title }}</div>
                 <div class="card-body text-secondary">
                     <h6 class="card-title">{{ $post->user->full_name }}</h6>
-                    <p class="card-text">{{ $post->content }}</p>
+                    <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
                 </div>
             </div>
         </div>
