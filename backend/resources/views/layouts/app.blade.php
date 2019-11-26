@@ -82,7 +82,7 @@
             </div>
         </div>
     </nav>
-    <div id="second-nav-bar" class="second-nav-bar">
+    <div id="second-nav-bar" class="second-nav-bar shadow-sm">
         <div class="second-nav-bar d-flex justify-content-center">
             <div class="logo_wrapper">
                 <a href="{{ route('home') }}">
