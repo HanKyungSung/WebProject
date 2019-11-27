@@ -26,6 +26,8 @@ Route::get('/create-post-form', 'PostController@create');
 
 Route::get('/post/{post}/show', 'PostController@show');
 
+Route::delete('/post/{post}/delete', 'PostController@destroy');
+
 Route::post('/create-comment', 'CommentController@store');
 
 Route::get('/user/{user}/settings', 'UserController@edit');

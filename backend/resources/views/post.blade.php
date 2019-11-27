@@ -21,8 +21,12 @@
         </div>
         @auth
             @if(Auth::user()->id == $post->user->id)
-            <div class="d-flex col-12 justify-content-end">
-                <button type="button" class="btn btn-danger">Delete</button>
+            <div class="d-flex col-12 justify-content-end mt-1 mb-1">
+                <form action="/post/{{ $post->id }}/delete?page={{ $page }}" method="POST">
+                    @method('delete')
+                    @csrf
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
             </div>
             @endif
         @endAuth

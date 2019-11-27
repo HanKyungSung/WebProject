@@ -66,14 +66,16 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Post  $post
+     * @param  Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
         $comments = \App\Comment::where('post_id', $post->id)->with(['user'])->get();
         return view('post')->with([
                             'post' => $post,
-                            'comments' => $comments
+                            'comments' => $comments,
+                            'page' => $request->input('page')
                             ]);
     }
 
@@ -104,10 +106,20 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Post  $post
+     * @param  Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, Request $request)
     {
-        //
+        $post->delete();
+
+        if($request->input('page') == 'posts')
+        {
+            return redirect()->action('HomeController@index');
+        }
+        else if($request->input('page') == 'mypage')
+        {
+            return redirect()->action('MypageController@index');
+        }
     }
 }
