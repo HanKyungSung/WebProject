@@ -73,10 +73,10 @@ class PostController extends Controller
     {
         $comments = \App\Comment::where('post_id', $post->id)->with(['user'])->get();
         return view('post')->with([
-                            'post' => $post,
-                            'comments' => $comments,
-                            'page' => $request->input('page')
-                            ]);
+            'post' => $post,
+            'comments' => $comments,
+            'page' => $request->input('page')
+            ]);
     }
 
     /**
@@ -85,9 +85,15 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post, Request $request)
     {
-        //
+        
+        $comments = \App\Comment::where('post_id', $post->id)->with(['user'])->get();
+        return view('editPost')->with([
+            'post' => $post,
+            'comments' => $comments,
+            'page' => $request->input('page')
+            ]);
     }
 
     /**
@@ -99,7 +105,22 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        if($request->input('content') != null)
+        {
+            $post->update($request->all());
+        }
+        else
+        {
+            $post->update([
+                'title' => $request->input('title'),
+                'content' => $post->content
+            ]);
+        }
+        return view('post')->with([
+            'post' => $post,
+            'comments' => $post->comments,
+            'page' => $request->input('page')
+            ]);
     }
 
     /**

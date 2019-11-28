@@ -28,6 +28,10 @@ Route::get('/post/{post}/show', 'PostController@show');
 
 Route::delete('/post/{post}/delete', 'PostController@destroy');
 
+Route::get('/post/{post}/edit', 'PostController@edit');
+
+Route::put('/post/{post}/update', 'PostController@update');
+
 Route::post('/create-comment', 'CommentController@store');
 
 Route::get('/user/{user}/settings', 'UserController@edit');

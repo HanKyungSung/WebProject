@@ -1,24 +1,19 @@
 @extends('layouts.app') @section('content')
 <div class="container">
-    @auth
-        @if(Auth::user()->id == $post->user->id)
-        <div class="row mb-2">
-            <div class="d-flex col-12 justify-content-end">
-                <a href="/post/{{ $post->id }}/edit?page={{ $page }}" class="btn btn-success mb-2" role="button">Edit</a>
-            </div>
-        </div>
-        @endif
-    @endAuth
     <div class="row">
-        <div id="post" class="col-12">
+        <div class="col-12">
+            <form method="POST" action="/post/{{ $post->id }}/update">
+            @method('put')
             @csrf
-            <div class="card border-secondary mb-3">
-                <div class="card-header">{{ $post->title }}</div>
-                <div class="card-body text-secondary">
-                    <h6 class="card-title">{{ $post->user->full_name }}</h6>
-                    <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Edit Post</label>
+                    <input type="hidden" name="user_id" class="form-control" value="{{ $post->user_id }}">
+                    <input type="text" name="title" class="form-control mb-2" placeholder="{{ $post->title }}" value="{{ $post->title }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <textarea name="content" placeholder="{{ $post->content }}" value="{{ $post->content }}" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <input class="btn btn-primary" type="submit" value="Save Change">
+                    <a href="/post/{{ $post->id }}/show?page={{ $page }}" class="btn btn-success" role="button">Cancel</a>
                 </div>
-            </div>
+            </form>
         </div>
         @auth
             @if(Auth::user()->id == $post->user->id)
