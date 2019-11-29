@@ -43,7 +43,7 @@
         @endforeach
         @auth
         <div class="col-12">
-            <form method="POST" action="/create-comment">
+            <form method="POST" action="/create-comment?page={{ $page }}">
             @csrf
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Comment</label>

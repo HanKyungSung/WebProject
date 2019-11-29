@@ -44,7 +44,8 @@ class CommentController extends Controller
 
         return view('post')->with([
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'page' => $request->input('page')
             ]);
     }
 
