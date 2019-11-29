@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(20);
+        $posts = Post::where('status', '=', 'active')->paginate(20);
         return view('welcome', ['posts' => $posts]);
     }
 
@@ -106,7 +106,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->update($request->all());
-        
+
         return view('post')->with([
             'post' => $post,
             'comments' => $post->comments,
