@@ -1,36 +1,33 @@
 @extends('layouts.app') @section('content')
 <div class="container">
-    @auth
-        @if(Auth::user()->id == $post->user->id)
-        <div class="row mb-2">
-            <div class="d-flex col-12 justify-content-end">
-                <a href="/post/{{ $post->id }}/edit?page={{ $page }}" class="btn btn-success mb-2" role="button">Edit</a>
-            </div>
-        </div>
-        @endif
-    @endAuth
     <div class="row">
         <div id="post" class="col-12">
             @csrf
             <div class="card border-secondary mb-3">
-                <div class="card-header">{{ $post->title }}</div>
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="mr-auto">
+                            {{ $post->title }}
+                        </div>
+                        @auth
+                            @if(Auth::user()->id == $post->user->id)
+                            <div class="px-2">
+                                <a href="/post/{{ $post->id }}/edit?page={{ $page }}">Edit</a>
+                            </div>
+                            <div class="px-2">
+                                <a href="/post/{{ $post->id }}/delete?page={{ $page }}">Delete</a>
+                            </div>
+                            @endif
+                        @endAuth
+                    </div>
+                </div>
+                <div class="card-header">{{ $post->user->full_name }}</div>
                 <div class="card-body text-secondary">
-                    <h6 class="card-title">{{ $post->user->full_name }}</h6>
+                    <!-- <h6 class="card-title">{{ $post->user->full_name }}</h6> -->
                     <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
                 </div>
             </div>
         </div>
-        @auth
-            @if(Auth::user()->id == $post->user->id)
-            <div class="d-flex col-12 justify-content-end mt-1 mb-1">
-                <form action="/post/{{ $post->id }}/delete?page={{ $page }}" method="POST">
-                    @method('delete')
-                    @csrf
-                    <input type="submit" class="btn btn-danger" value="Delete"/>
-                </form>
-            </div>
-            @endif
-        @endAuth
         @foreach($comments as $comment)     
         <div class="col-12">
             <div class="card border-secondary mb-3">

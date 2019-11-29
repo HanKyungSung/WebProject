@@ -105,17 +105,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if($request->input('content') != null)
-        {
-            $post->update($request->all());
-        }
-        else
-        {
-            $post->update([
-                'title' => $request->input('title'),
-                'content' => $post->content
-            ]);
-        }
+        $post->update($request->all());
+        
         return view('post')->with([
             'post' => $post,
             'comments' => $post->comments,
