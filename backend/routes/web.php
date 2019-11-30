@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +34,12 @@ Route::get('/user/{user}/settings', 'UserController@edit');
 
 Route::post('/user/{user}/settings/update');
 
-Route::get('/user/{user}/posts', 'UserController@index');
+// Route::get('/user/{user}/posts', 'UserController@index');
 
-Route::get('/mypage', 'MypageController@index');
+Route::get('/mypage', 'UserController@index');
+
+
+Route::get('/test2',function() {
+    $user = \Auth::user();
+    dd($user->posts());
+});

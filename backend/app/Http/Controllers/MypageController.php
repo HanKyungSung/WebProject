@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\User;
+    
 class MypageController extends Controller
 {
     /**
@@ -25,11 +26,12 @@ class MypageController extends Controller
         // Get the currently authenticated user's ID...
         $id = Auth::id();
 
-        $users = DB::select('select * from users where id = :id', ['id' => $id]);
+        //$users = DB::select('select * from users where id = :id', ['id' => $id]);
  
         //$post = \App\Post::where('user_id = ?', $id);
+        //return dd($post);
         // $post = \App\Post::find(1);
-        $post = DB::select('select * from posts where user_id = :id', ['id' => $id]);
+        $post = $user->posts()->get();//DB::select('select * from posts where user_id = :id', ['id' => $id]);
         // $comments = $post->comments;
 
         // return view('post')->with([
@@ -39,7 +41,7 @@ class MypageController extends Controller
 
         return view('mypage')->with([
             'posts' => $post,
-            'users' => $users
+            'user' => $user
             ]);
     }
 

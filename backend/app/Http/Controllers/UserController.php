@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,8 +15,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Code here ...
-        return "index";
+        // Code will be here to store post.
+        if (!Auth::check()) 
+        return redirect()->intended('home');
+        
+        // Get the currently authenticated user...
+        $post = Auth::user()->posts()->get();
+
+        return view('mypage')->with([
+            'posts' => $post,
+            ]);
     }
 
     /**
