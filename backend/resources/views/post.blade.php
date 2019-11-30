@@ -1,21 +1,37 @@
 @extends('layouts.app') @section('content')
 <div class="container">
+    @auth
+        @if(Auth::user()->id == $post->user->id)
+        <div class="row mb-2">
+            <div class="d-flex col-12 justify-content-end">
+                <button type="button" class="btn btn-success">Edit</button>
+            </div>
+        </div>
+        @endif
+    @endAuth
     <div class="row">
         <div class="col-12">
             <div class="card border-secondary mb-3">
                 <div class="card-header">{{ $post->title }}</div>
                 <div class="card-body text-secondary">
                     <h6 class="card-title">{{ $post->user->full_name }}</h6>
-                    <p class="card-text">{{ $post->content }}</p>
+                    <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
                 </div>
             </div>
         </div>
+        @auth
+            @if(Auth::user()->id == $post->user->id)
+            <div class="d-flex col-12 justify-content-end">
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+            @endif
+        @endAuth
         @foreach($comments as $comment)     
         <div class="col-12">
             <div class="card border-secondary mb-3">
                 <div class="card-header">{{ $comment->user->full_name }}</div>
                 <div class="card-body text-secondary">
-                    <p class="card-text">{{ $comment->comment }}</p>
+                    <p class="card-text">{!! nl2br(e($comment->comment)) !!}</p>
                 </div>
             </div>
         </div>

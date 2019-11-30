@@ -82,7 +82,7 @@
             </div>
         </div>
     </nav>
-    <div id="second-nav-bar" class="second-nav-bar">
+    <div id="second-nav-bar" class="second-nav-bar shadow-sm">
         <div class="second-nav-bar d-flex justify-content-center">
             <div class="logo_wrapper">
                 <a href="{{ route('home') }}">
@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    <nav id="last-nav-bar" class="navbar navbar-expand-lg p-0 border border-black">
+    <!-- <nav id="last-nav-bar" class="navbar navbar-expand-lg p-0 border border-black">
         <div class="collapse navbar-collapse justify-content-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -122,7 +122,7 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <!-- Body -->
     <div id="app">
         <div class="main py-2">
