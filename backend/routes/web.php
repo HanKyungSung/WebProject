@@ -32,6 +32,12 @@ Route::get('/post/{post}/edit', 'PostController@edit');
 
 Route::put('/post/{post}/update', 'PostController@update');
 
+Route::get('/comment/{comment}/delete', 'CommentController@destroy');
+
+Route::get('/comment/{comment}/edit', 'CommentController@edit');
+
+Route::put('/comment/{comment}/update', 'CommentController@update');
+
 Route::post('/create-comment', 'CommentController@store');
 
 Route::get('/user/{user}/settings', 'UserController@edit');

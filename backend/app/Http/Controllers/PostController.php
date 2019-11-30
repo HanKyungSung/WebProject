@@ -71,10 +71,9 @@ class PostController extends Controller
      */
     public function show(Post $post, Request $request)
     {
-        $comments = \App\Comment::where('post_id', $post->id)->with(['user'])->get();
         return view('post')->with([
             'post' => $post,
-            'comments' => $comments,
+            'comments' => $post->comments,
             'page' => $request->input('page')
             ]);
     }
