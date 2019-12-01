@@ -31,7 +31,7 @@
                     <tbody>
                         @foreach($posts as $post)
                         <tr>                            
-                            <td><a href=post/{{ $post->id }}/show>{{ $post->title }}</a></td>                           
+                            <td><a href="post/{{ $post->id }}/show?page=mypage">{{ $post->title }}</a></td>                           
                             <td>{{ $post->created_at }}</td>
                         </tr>
                         @endforeach

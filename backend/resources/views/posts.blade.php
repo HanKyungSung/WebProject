@@ -22,7 +22,7 @@
                         @foreach($posts as $post)
                         <tr>
                             <td>{{ $post->id }}</td>
-                            <td><a href="/post/{{ $post->id }}/show">{{ $post->title }}</a></td>
+                            <td><a href="/post/{{ $post->id }}/show?page=posts">{{ $post->title }}</a></td>
                             <td>{{ $post->user->full_name }}</td>
                             <td>{{ $post->created_at }}</td>
                         </tr>

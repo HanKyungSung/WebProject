@@ -39,7 +39,7 @@ class MypageController extends Controller
 
         return view('mypage')->with([
             'posts' => $post,
-            'users' => $users
+            'users' => $users,
             ]);
     }
 

@@ -42,10 +42,10 @@ class CommentController extends Controller
         $post = \App\Post::find($request->post_id);
         $comments = $post->comments;
 
-        return view('post')->with([
+        return redirect()->action('PostController@show', [
             'post' => $post,
-            'comments' => $comments
-            ]);
+            'page' => $request->input('page')
+        ]);
     }
 
     /**
@@ -65,9 +65,16 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Comment $comment, Request $request)
     {
-        //
+        $post = $comment->post;
+
+        return view('editComment', [
+            'post' => $post,
+            'comments' => $post->comments,
+            'target_comment' => $comment,
+            'page' => $request->input('page')
+        ]);
     }
 
     /**
@@ -79,7 +86,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update($request->all());
+        $post = $comment->post;
+        
+        return redirect()->action('PostController@show', [
+            'post' => $post,
+            'page' => $request->input('page')
+        ]);
+
+        return view('post', [
+            'post' => $post,
+            'comments' => $post->comments,
+            'page' => $request->input('page')
+        ]);
     }
 
     /**
@@ -88,8 +107,17 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment, Request $request)
     {
-        //
+        $comment->update([
+            'status' => 'deleted'
+        ]);
+        $post = $comment->post;
+
+        return view('post', [
+            'post' => $post,
+            'comments' => $post->comments,
+            'page' => $request->input('page')
+        ]);
     }
 }
