@@ -28,8 +28,21 @@
                 </div>
             </div>
         </div>
-        @foreach($comments as $comment)     
+        @foreach($comments as $comment)
         <div class="col-12">
+            @if($target_comment->id == $comment->id)
+            <form method="POST" action="/comment/{{ $comment->id }}/update">
+                @method('put')
+                @csrf
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Edit Comment</label>
+                    <input type="hidden" name="user_id" class="form-control" value="{{ $comment->user_id }}">
+                    <textarea name="comment" placeholder="{{ $comment->comment }}" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3">{{ $comment->comment }}</textarea>
+                    <input class="btn btn-primary" type="submit" value="Save Change">
+                    <a href="/post/{{ $post->id }}/show?page={{ $page }}" class="btn btn-success" role="button">Cancel</a>
+                </div>
+            </form>
+            @endif
             <div class="card border-secondary mb-3">
                 <div class="card-header">
                     <div class="d-flex">
