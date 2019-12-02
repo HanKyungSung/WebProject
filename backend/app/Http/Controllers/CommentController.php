@@ -67,6 +67,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment, Request $request)
     {
+        $this->authorize('update', $comment);
+
         $post = $comment->post;
 
         return view('editComment', [
@@ -88,15 +90,11 @@ class CommentController extends Controller
     {
         $comment->update($request->all());
         $post = $comment->post;
+        $page = $request->input('page');
         
+        return redirect("/post/$post->id/show?page=$page");
         return redirect()->action('PostController@show', [
             'post' => $post,
-            'page' => $request->input('page')
-        ]);
-
-        return view('post', [
-            'post' => $post,
-            'comments' => $post->comments,
             'page' => $request->input('page')
         ]);
     }
@@ -109,6 +107,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment, Request $request)
     {
+        $this->authorize('delete', $comment);
+
         $comment->update([
             'status' => 'deleted'
         ]);

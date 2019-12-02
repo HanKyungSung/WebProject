@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', '=', 'active')->paginate(20);
+        $posts = Post::where('status', '=', 'active')->paginate(15);
         return view('welcome', ['posts' => $posts]);
     }
 
@@ -86,11 +86,11 @@ class PostController extends Controller
      */
     public function edit(Post $post, Request $request)
     {
+        $this->authorize('update', $post);
         
-        $comments = \App\Comment::where('post_id', $post->id)->with(['user'])->get();
         return view('editPost')->with([
             'post' => $post,
-            'comments' => $comments,
+            'comments' => $post->comments,
             'page' => $request->input('page')
             ]);
     }
@@ -104,13 +104,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
+        $this->authorize('update', $post);
 
-        return view('post')->with([
-            'post' => $post,
-            'comments' => $post->comments,
-            'page' => $request->input('page')
-            ]);
+        $post->update($request->all());
+        $page = $request->input('page');
+
+        return redirect("/post/$post->id/show?page=$page");
     }
 
     /**
@@ -122,7 +121,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post, Request $request)
     {
-        $post->delete();
+        $this->authorize('delete', $post);
+
+        $post->update([
+            'status' => 'deleted'
+        ]);
 
         if($request->input('page') == 'posts')
         {

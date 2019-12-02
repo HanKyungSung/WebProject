@@ -8,6 +8,7 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Edit Post</label>
                     <input type="hidden" name="user_id" class="form-control" value="{{ $post->user_id }}">
+                    <input type="hidden" name="page" class="form-control" value="{{ $page }}">
                     <input type="text" name="title" class="form-control mb-2" placeholder="{{ $post->title }}" value="{{ $post->title }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <textarea name="content" placeholder="{{ $post->content }}" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3">{{ $post->content }}</textarea>
                     <input class="btn btn-primary" type="submit" value="Save Change">
