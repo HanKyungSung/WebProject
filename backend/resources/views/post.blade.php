@@ -10,7 +10,7 @@
                             {{ $post->title }}
                         </div>
                         @auth
-                            @if(Auth::user()->id == $post->user->id)
+                            @if(Auth::user()->id == $post->user->id || Auth::user()->auth_level <= 2)
                                 <div class="px-2">
                                     <a href="/post/{{ $post->id }}/edit?page={{ $page }}">Edit</a>
                                 </div>
@@ -37,7 +37,7 @@
                             {{ $comment->user->full_name }}
                         </div>
                         @auth
-                            @if(Auth::user()->id == $comment->user_id)
+                            @if(Auth::user()->id == $comment->user_id || Auth::user()->auth_level <= 2)
                                 <div class="px-2">
                                     <a href="/comment/{{ $comment->id }}/edit?page={{ $page }}">Edit</a>
                                 </div>
