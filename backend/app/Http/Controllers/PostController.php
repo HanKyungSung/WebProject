@@ -94,7 +94,8 @@ class PostController extends Controller
             'page' => $request->input('page')
             ]);
     }
-
+    // Resource
+    // https://www.findbestwebhosting.com/web-hosting-blog/index.php/how-to-use-summernote-wysiwyg-editor-with-laravel
     /**
      * Update the specified resource in storage.
      *
@@ -105,7 +106,25 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
+        $content = $request->input('content');
+        $dom = new \DomDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
 
+        foreach($images as $k => $img)
+        {
+            $data = $img->getAttribute('src');
+        dd($k, $data);
+            list($data)= explode(',' , $data);
+        dd($data);
+            $data = base64_decode($data);
+            $image_name= "/upload/" . time().$k.'.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+dd($request->all(), $images);
         $post->update($request->all());
         $page = $request->input('page');
 

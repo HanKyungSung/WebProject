@@ -1,5 +1,11 @@
 @extends('layouts.app') @section('content')
 <div class="container">
+    <div class="alert alert-danger alert-dismissible" id="image-size-exceed" role="alert" style="display:none">
+        <strong>Check the image size!</strong> Image size can't be exceed 1MB.
+        <button type="button" class="close" id="close-alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="row">
         <div class="col-12">
             <form method="POST" action="/post/{{ $post->id }}/update">
@@ -10,23 +16,13 @@
                     <input type="hidden" name="user_id" class="form-control" value="{{ $post->user_id }}">
                     <input type="hidden" name="page" class="form-control" value="{{ $page }}">
                     <input type="text" name="title" class="form-control mb-2" placeholder="{{ $post->title }}" value="{{ $post->title }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <textarea name="content" placeholder="{{ $post->content }}" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3">{{ $post->content }}</textarea>
+                    <textarea name="content" placeholder="{{ $post->content }}" class="form-control mb-3" id="summernote" rows="3">{{ $post->content }}</textarea>
                     <input class="btn btn-primary" type="submit" value="Save Change">
                     <a href="/post/{{ $post->id }}/show?page={{ $page }}" class="btn btn-success" role="button">Cancel</a>
                 </div>
+                
             </form>
         </div>
-        @auth
-            @if(Auth::user()->id == $post->user->id)
-            <div class="d-flex col-12 justify-content-end mt-1 mb-1">
-                <form action="/post/{{ $post->id }}/delete?page={{ $page }}" method="POST">
-                    @method('delete')
-                    @csrf
-                    <input type="submit" class="btn btn-danger" value="Delete"/>
-                </form>
-            </div>
-            @endif
-        @endAuth
         @foreach($comments as $comment)     
         <div class="col-12">
             <div class="card border-secondary mb-3">
