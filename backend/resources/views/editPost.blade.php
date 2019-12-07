@@ -17,8 +17,10 @@
                     <input type="hidden" name="page" class="form-control" value="{{ $page }}">
                     <input type="text" name="title" class="form-control mb-2" placeholder="{{ $post->title }}" value="{{ $post->title }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <textarea name="content" placeholder="{{ $post->content }}" class="form-control mb-3" id="summernote" rows="3">{{ $post->content }}</textarea>
-                    <input class="btn btn-primary" type="submit" value="Save Change">
-                    <a href="/post/{{ $post->id }}/show?page={{ $page }}" class="btn btn-success" role="button">Cancel</a>
+                    <div class="mt-2">
+                        <input class="btn btn-primary" type="submit" value="Save Change">
+                        <a href="/post/{{ $post->id }}/show?page={{ $page }}" class="btn btn-success" role="button">Cancel</a>
+                    </div>
                 </div>
                 
             </form>
