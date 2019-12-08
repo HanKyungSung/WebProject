@@ -31,6 +31,12 @@ class PostController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * Resource:
+     * https://www.findbestwebhosting.com/web-hosting-blog/index.php/how-to-use-summernote-wysiwyg-editor-with-laravel
+     * https://stackoverflow.com/questions/8218230/php-domdocument-loadhtml-not-encoding-utf-8-correctly
+     * Stack:
+     * Summernote
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -41,22 +47,56 @@ class PostController extends Controller
         if (!Auth::check()) 
             return redirect()->intended('home');
 
-        // Validate post data
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-        ]);
-        
         // Get the currently authenticated user...
         $user = Auth::user();
 
-        // Get the currently authenticated user's ID...
-        $id = Auth::id();
+        // Validate post data
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
 
-        Post::create([
-            'content' => $request->content,
-            'title' => $request->title,
-            'user_id' => $id,
+        $content = $request->input('content');
+        $dom = new \DomDocument();
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+        // Initially save the content
+        $post = Post::create([
+            'content' => $content,
+            'title' => $request->get('title'),
+            'user_id' => $user->id
+        ]);
+        
+        foreach($images as $k => $img)
+        {
+            $data = $img->getAttribute('src');
+            // check if the picture is already store in our database.
+            if(count($result = explode(';', $data)) > 1)
+            {
+                // Seperate the data type and actual data.
+                list($type, $data) = $result;
+                // Remove base64 before ','
+                list(,$data)= explode(',' , $data);
+                // Decode the data
+                $data = base64_decode($data);
+                $image_name = time().$k.'.png';
+                $path = public_path()."/upload/".$image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', "/upload/".$image_name);
+
+                \App\File::create([
+                    'user_id' => $user->id,
+                    'post_id' => $post->id,
+                    'file_name' => $image_name
+                ]);
+            }
+        }
+        // Because of the utf-8 encoding problem, the following code has been added.
+        $content = utf8_decode($dom->saveHTML($dom->documentElement));
+        // Update the content of th post after.
+        $post->update([
+            'content' => $content
         ]);
         
         return redirect()->intended('home');
@@ -87,7 +127,7 @@ class PostController extends Controller
     public function edit(Post $post, Request $request)
     {
         $this->authorize('update', $post);
-        
+
         return view('editPost')->with([
             'post' => $post,
             'comments' => $post->comments,
@@ -97,6 +137,12 @@ class PostController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * Resource:
+     * https://www.findbestwebhosting.com/web-hosting-blog/index.php/how-to-use-summernote-wysiwyg-editor-with-laravel
+     * https://stackoverflow.com/questions/8218230/php-domdocument-loadhtml-not-encoding-utf-8-correctly
+     * Stack:
+     * Summernote
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Post  $post
@@ -105,8 +151,43 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->authorize('update', $post);
+        $content = $request->input('content');
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
 
-        $post->update($request->all());
+        foreach($images as $k => $img)
+        {
+            $data = $img->getAttribute('src');
+            // check if the picture is already store in our database.
+            if(count($result = explode(';', $data)) > 1)
+            {
+                // Seperate the data type and actual data.
+                list($type, $data) = $result;
+                // Remove base64 before ','
+                list(,$data)= explode(',' , $data);
+                // Decode the data
+                $data = base64_decode($data);
+                $image_name = time().$k.'.png';
+                $path = public_path()."/upload/".$image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', "/upload/".$image_name);
+
+                \App\File::create([
+                    'user_id' => $post->user->id,
+                    'post_id' => $post->id,
+                    'file_name' => $image_name
+                ]);
+            }
+        }
+        // Because of the utf-8 encoding problem, the following code has been added.
+        $content = utf8_decode($dom->saveHTML($dom->documentElement));
+        $post->update([
+            'title' => $request->get('title'),
+            'content' => $content
+        ]);
         $page = $request->input('page');
 
         return redirect("/post/$post->id/show?page=$page");
