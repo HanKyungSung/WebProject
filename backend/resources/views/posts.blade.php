@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col">
             <div class="table_wrapper">
-                <table class="table table-sm table-striped">
+                <table class="table table-sm table-hover">
                     <thead>
                         <th>#</th>
                         <th>제목</th>
