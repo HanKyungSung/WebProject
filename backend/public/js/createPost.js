@@ -5,7 +5,6 @@ $(document).ready(function () {
         maximumImageFileSize: 1048576,
         callbacks: {
             onImageUploadError: function() {
-                console.log("asdf");
                 $('#image-size-exceed').show();
             }
         }
