@@ -48,6 +48,7 @@
                     Please login to create a post!
                 </div>
                 <div class="modal-footer">
+                    <a role="button" class="btn btn-primary" href="{{ route('login') }}">Login</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

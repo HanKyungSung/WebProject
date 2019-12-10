@@ -24,8 +24,6 @@
     <!-- include summernote css/js -->
     <link href="{{ asset('dist/summernote-bs4.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('dist/summernote-bs4.js') }}" defer></script>
-
-    <script src="{{ asset('js/createPost.js') }}" defer></script>
 </head>
 
 <body>
