@@ -1,7 +1,9 @@
 @extends('layouts.app') @section('content')
+<script src="{{ asset('js/createPost.js') }}" defer></script>
+
 <div class="container">
     <div class="alert alert-danger alert-dismissible" id="image-size-exceed" role="alert" style="display:none">
-        <strong>Check the image size!</strong> Image size can't be exceed 1MB.
+        <strong>Check the image size!</strong> Image size can't be exceed 3MB.
         <button type="button" class="close" id="close-alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
