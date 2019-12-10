@@ -8,6 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Open Graph Protocol (OGP) -->
+    <meta property="og:title" content="Konada"/>
+    <meta property="og:image" content="https://konada.ca/logos/logo.png"/>
+    <meta property="og:description" content="Konada is the website for u of manitoba students."/>
+    <meta property="og:url" content="https://konada.ca"/>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

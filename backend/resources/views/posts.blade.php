@@ -20,9 +20,9 @@
                     </thead>
                     <tbody>
                         @foreach($posts as $post)
-                        <tr>
+                        <tr onclick="window.location='/post/{{ $post->id }}/show?page=posts'";>
                             <td>{{ $post->id }}</td>
-                            <td><a href="/post/{{ $post->id }}/show?page=posts">{{ $post->title }}</a></td>
+                            <td>{{ $post->title }}</td>
                             <td>{{ $post->user->full_name }}</td>
                             <td>{{ $post->created_at }}</td>
                         </tr>
