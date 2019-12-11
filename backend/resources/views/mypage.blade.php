@@ -11,18 +11,12 @@
                     </thead>
                     <tbody>
                         @foreach ($posts as $post)
-                        <tr>                            
-<<<<<<< HEAD
+                        <tr> 
                             <td><a href=post/{{ $post->id }}/show>{{ Str::limit($post->title,10) }}</a></td>                           
                             <td>{{ Str::limit($post->content,50) }}</td>
                             <td>{{ $post->created_at->format('Y/m/d') }}</td>
-=======
-                            <td><a href="post/{{ $post->id }}/show?page=mypage">{{ $post->title }}</a></td>                           
-                            <td>{{ $post->created_at }}</td>
->>>>>>> e45869855a3b4593905b26e92ecc4a372aecb1a7
                         </tr>
-                       @endforeach
-                     
+                       @endforeach                     
                     </tbody>
                 </table>
             </div>
