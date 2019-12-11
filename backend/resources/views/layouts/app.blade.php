@@ -8,10 +8,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Open Graph Protocol (OGP) -->
+    <meta property="og:title" content="Konada"/>
+    <meta property="og:image" content="https://konada.ca/logos/logo.png"/>
+    <meta property="og:description" content="Konada is the website for u of manitoba students."/>
+    <meta property="og:url" content="https://konada.ca"/>
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,6 +26,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app_custom.css') }}" rel="stylesheet" type="text/css">
+    
+    <!-- include summernote css/js -->
+    <link href="{{ asset('dist/summernote-bs4.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('dist/summernote-bs4.js') }}" defer></script>
 </head>
 
 <body>

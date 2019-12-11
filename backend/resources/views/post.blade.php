@@ -1,35 +1,54 @@
 @extends('layouts.app') @section('content')
 <div class="container">
-    @auth
-        @if(Auth::user()->id == $post->user->id)
-        <div class="row mb-2">
-            <div class="d-flex col-12 justify-content-end">
-                <button type="button" class="btn btn-success">Edit</button>
-            </div>
-        </div>
-        @endif
-    @endAuth
     <div class="row">
-        <div class="col-12">
+        <div id="post" class="col-12">
+            @csrf
             <div class="card border-secondary mb-3">
-                <div class="card-header">{{ $post->title }}</div>
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="mr-auto">
+                            {{ $post->title }}
+                        </div>
+                        @auth
+                            @if(Auth::user()->id == $post->user->id || Auth::user()->auth_level <= 2)
+                                <div class="px-2">
+                                    <a href="/post/{{ $post->id }}/edit?page={{ $page }}">Edit</a>
+                                </div>
+                                <div class="px-2">
+                                    <a href="/post/{{ $post->id }}/delete?page={{ $page }}">Delete</a>
+                                </div>
+                            @endif
+                        @endAuth
+                    </div>
+                </div>
+                <div class="card-header">{{ $post->user->full_name }}</div>
                 <div class="card-body text-secondary">
-                    <h6 class="card-title">{{ $post->user->full_name }}</h6>
-                    <p class="card-text">{!! nl2br(e($post->content)) !!}</p>
+                    <!-- <h6 class="card-title">{{ $post->user->full_name }}</h6> -->
+                    <!-- <p class="card-text">{!! nl2br(e($post->content)) !!}</p> -->
+                    <p class="card-text">{!! $post->content !!}</p>
                 </div>
             </div>
         </div>
-        @auth
-            @if(Auth::user()->id == $post->user->id)
-            <div class="d-flex col-12 justify-content-end">
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-            @endif
-        @endAuth
         @foreach($comments as $comment)     
         <div class="col-12">
             <div class="card border-secondary mb-3">
-                <div class="card-header">{{ $comment->user->full_name }}</div>
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="mr-auto">
+                            {{ $comment->user->full_name }}
+                        </div>
+                        @auth
+                            @if(Auth::user()->id == $comment->user_id || Auth::user()->auth_level <= 2)
+                                <div class="px-2">
+                                    <a href="/comment/{{ $comment->id }}/edit?page={{ $page }}">Edit</a>
+                                </div>
+                                <div class="px-2">
+                                    <a href="/comment/{{ $comment->id }}/delete?page={{ $page }}">Delete</a>
+                                </div>
+                            @endif
+                        @endAuth
+                    </div>
+                </div>
                 <div class="card-body text-secondary">
                     <p class="card-text">{!! nl2br(e($comment->comment)) !!}</p>
                 </div>
@@ -38,7 +57,7 @@
         @endforeach
         @auth
         <div class="col-12">
-            <form method="POST" action="/create-comment">
+            <form method="POST" action="/create-comment?page={{ $page }}">
             @csrf
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Comment</label>

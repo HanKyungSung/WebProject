@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col">
             <div class="table_wrapper">
-                <table class="table table-sm table-striped">
+                <table class="table table-sm table-hover">
                     <thead>
                         <th>#</th>
                         <th>제목</th>
@@ -20,9 +20,9 @@
                     </thead>
                     <tbody>
                         @foreach($posts as $post)
-                        <tr>
+                        <tr onclick="window.location='/post/{{ $post->id }}/show?page=posts'";>
                             <td>{{ $post->id }}</td>
-                            <td><a href="/post/{{ $post->id }}/show">{{ $post->title }}</a></td>
+                            <td>{{ $post->title }}</td>
                             <td>{{ $post->user->full_name }}</td>
                             <td>{{ $post->created_at }}</td>
                         </tr>
@@ -48,6 +48,7 @@
                     Please login to create a post!
                 </div>
                 <div class="modal-footer">
+                    <a role="button" class="btn btn-primary" href="{{ route('login') }}">Login</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
