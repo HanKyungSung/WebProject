@@ -17,6 +17,7 @@
                             <td>{{ $post->created_at->format('Y/m/d') }}</td>
                         </tr>
                        @endforeach
+                     
                     </tbody>
                 </table>
             </div>

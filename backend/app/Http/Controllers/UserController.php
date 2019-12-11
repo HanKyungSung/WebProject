@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Comment;
+use App\post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,10 +22,21 @@ class UserController extends Controller
         return redirect()->intended('home');
         
         // Get the currently authenticated user...
-        $post = Auth::user()->posts()->get();
-
+        $posts = Auth::user()->posts()->get();
+        $comments = Auth::user()->comments()->get();
+        
+        $id_array = array();
+        foreach ($posts as $comment) {
+            $id_array[] = $comment->id;
+        }
+        foreach ($comments as $comment) {
+            $id_array[] = $comment->post_id;
+        }
+        sort($id_array);
+        $posts = Post::all()->find($id_array);
+        
         return view('mypage')->with([
-            'posts' => $post,
+            'posts' => $posts,
             ]);
     }
 
