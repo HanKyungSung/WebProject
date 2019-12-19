@@ -69,7 +69,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user = \Auth::user();
+        return $user;
     }
 
     /**
@@ -80,8 +81,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        // Code here ...
-        return "edit";
+        $user = \Auth::user();        
+        return $user;
     }
 
     /**
@@ -93,7 +94,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // temporary return string
+        return "done";
     }
 
     /**
