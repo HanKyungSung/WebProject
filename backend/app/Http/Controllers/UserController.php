@@ -26,17 +26,15 @@ class UserController extends Controller
         $comments = Auth::user()->comments()->get();
         
         $id_array = array();
-        foreach ($posts as $comment) {
-            $id_array[] = $comment->id;
-        }
         foreach ($comments as $comment) {
             $id_array[] = $comment->post_id;
         }
         sort($id_array);
-        $posts = Post::all()->find($id_array);
+        $comments = Post::all()->find($id_array);
         
         return view('mypage')->with([
             'posts' => $posts,
+            'comments' => $comments,
             ]);
     }
 
