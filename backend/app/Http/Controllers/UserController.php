@@ -22,15 +22,14 @@ class UserController extends Controller
         return redirect()->intended('home');
         
         // Get the currently authenticated user...
-        $posts = Auth::user()->posts()->get();
+        $posts = Auth::user()->posts()->orderBy('id', 'DESC')->get();
         $comments = Auth::user()->comments()->get();
         
         $id_array = array();
         foreach ($comments as $comment) {
             $id_array[] = $comment->post_id;
         }
-        sort($id_array);
-        $comments = Post::all()->find($id_array);
+        $comments = Post::orderBy('id', 'DESC')->find($id_array);
         
         return view('mypage')->with([
             'posts' => $posts,
